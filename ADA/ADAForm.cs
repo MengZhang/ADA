@@ -105,9 +105,9 @@ namespace ADA
             }
         }
 
-        private void ToCSVByMS()
+        private void ToCSVByEPPlus()
         {
-            SetStatus("Start generating CSV with MS Engine...");
+            SetStatus("Start generating CSV with EPPlus Engine...");
             string inPath = inputTB.Text;
             string outPath = outputTB.Text + System.IO.Path.DirectorySeparatorChar;
             DomeFileReader reader = new DomeFileReader(inPath, outPath);
@@ -122,12 +122,12 @@ namespace ADA
                 null);
         }
 
-        private void ToCSVByEPPlus()
+        private void ToCSVByMS()
         {
-            SetStatus("Start generating CSV with EPPlus Engine...");
+            SetStatus("Start generating CSV with MS Engine...");
             string inPath = inputTB.Text;
             string outPath = outputTB.Text + System.IO.Path.DirectorySeparatorChar;
-            string excelName = "CSV_Generator.xlsm";
+            string excelName = "CSV_Generator .xlsm";
             string macroName = "generate";
             bool isShowExcel = false;
             object[] args = new object[] { inPath, outPath };
@@ -152,9 +152,14 @@ namespace ADA
                     SetStatus("Fail to load model to generate CSV");
                     MessageBox.Show(((Exception)ret["error"]).Message);
                 }
-                else
+                else if (inputTB.Text.ToLower().EndsWith(".xlsx"))
                 {
                     ToCSVByEPPlus();
+                }
+                else
+                {
+                    SetStatus("Please save the input file as *.xlsx and try safe mode.");
+                    MessageBox.Show(((Exception)ret["error"]).Message);
                 }
             }
             else if (ret.ContainsKey("result"))
@@ -165,8 +170,6 @@ namespace ADA
                     files = new string[0];
                 }
                 SetStatus("start compress to zip...");
-                //try
-                //{
 
                 if (files.Length > 0)
                 {
