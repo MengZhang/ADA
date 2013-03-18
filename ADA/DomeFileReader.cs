@@ -26,6 +26,7 @@ namespace ADA
         public Dictionary<string, object> ToCsvFiles()
         {
             Dictionary<string, object> ret = new Dictionary<string, object>();
+            ret.Add("mode", "EPPLUS");
             try
             {
                 IEnumerator<ExcelWorksheet> e = pck.Workbook.Worksheets.GetEnumerator();

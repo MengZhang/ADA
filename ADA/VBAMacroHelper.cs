@@ -31,6 +31,7 @@ namespace ADA
             )
         {
             Dictionary<string, object> rtnValue = new Dictionary<string, object>();
+            rtnValue.Add("mode", "MS");
             try
             {
                 #region Validation

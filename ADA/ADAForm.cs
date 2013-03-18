@@ -37,15 +37,22 @@ namespace ADA
 
         private void inputBrowse_Click(object sender, EventArgs e)
         {
-            openFileDialogIn.ShowDialog();
-            if (inputTB.Text.ToLower().EndsWith(".xlsx"))
+            if (modeCB.Checked)
             {
-                xlsWarnLB.Text = "";
+                openFileDialogIn.Filter = "excel files|*.xlsx";
             }
             else
             {
-                xlsWarnLB.Text = "If you do not install Microsoft Excel 2007,\n please save the input file as *.xlsx file.";
-
+                openFileDialogIn.Filter = "excel files|*.xlsx; *.xls; *.xlsm; *.xlsb";
+            }
+            openFileDialogIn.ShowDialog();
+            if (modeCB.Checked && !inputTB.Text.ToLower().EndsWith(".xlsx"))
+            {
+                ActiveBtn(false);
+            }
+            else
+            {
+                ActiveBtn(true);
             }
         }
 
@@ -86,59 +93,69 @@ namespace ADA
                 MessageBox.Show("Please select a directory for output file");
                 return;
             }
-
-            SetStatus("Start generating CSV...");
             ActiveBtn(false);
-            string inPath = inputTB.Text;
-            string outPath = outputTB.Text + System.IO.Path.DirectorySeparatorChar;
 
-            if (inPath.ToLower().EndsWith(".xlsx"))
+            if (modeCB.Checked)
             {
-                DomeFileReader reader = new DomeFileReader(inPath, outPath);
-                ToCsv runner = new ToCsv(reader.ToCsvFiles);
-                runner.BeginInvoke(
-                    new AsyncCallback(
-                        delegate(IAsyncResult result)
-                        {
-                            ToZip(runner.EndInvoke(result));
-                        }
-                    ),
-                    null);
+                ToCSVByEPPlus();
             }
             else
             {
-                string excelName = "CSV_Generator 0.2.1.xlsm";
-                string macroName = "generate";
-                bool isShowExcel = false;
-                object[] args = new object[] { inPath, outPath };
-                ToCsvByMacro runner = new ToCsvByMacro(ExcelMacroHelper.RunExcelMacro);
-                runner.BeginInvoke(
-                    excelName, macroName, args, isShowExcel,
-                    new AsyncCallback(
-                        delegate(IAsyncResult result)
-                        {
-                            //object ret = runner.EndInvoke(result);
-                            //if (ret == null)
-                            //{
-                            //    ToZip(new string[0]);
-                            //}
-                            //else
-                            //{
-                            //    ToZip((string[])ret);
-                            //}
-                            ToZip(runner.EndInvoke(result));
-                        }
-                    ),
-                    null);
+                ToCSVByMS(); 
             }
+        }
+
+        private void ToCSVByMS()
+        {
+            SetStatus("Start generating CSV with MS Engine...");
+            string inPath = inputTB.Text;
+            string outPath = outputTB.Text + System.IO.Path.DirectorySeparatorChar;
+            DomeFileReader reader = new DomeFileReader(inPath, outPath);
+            ToCsv runner = new ToCsv(reader.ToCsvFiles);
+            runner.BeginInvoke(
+                new AsyncCallback(
+                    delegate(IAsyncResult result)
+                    {
+                        ToZip(runner.EndInvoke(result));
+                    }
+                ),
+                null);
+        }
+
+        private void ToCSVByEPPlus()
+        {
+            SetStatus("Start generating CSV with EPPlus Engine...");
+            string inPath = inputTB.Text;
+            string outPath = outputTB.Text + System.IO.Path.DirectorySeparatorChar;
+            string excelName = "CSV_Generator.xlsm";
+            string macroName = "generate";
+            bool isShowExcel = false;
+            object[] args = new object[] { inPath, outPath };
+            ToCsvByMacro runner = new ToCsvByMacro(ExcelMacroHelper.RunExcelMacro);
+            runner.BeginInvoke(
+                excelName, macroName, args, isShowExcel,
+                new AsyncCallback(
+                    delegate(IAsyncResult result)
+                    {
+                        ToZip(runner.EndInvoke(result));
+                    }
+                ),
+                null);
         }
 
         private void ToZip(Dictionary<string, object> ret)
         {
             if (ret.ContainsKey("error"))
             {
-                SetStatus("Fail to load model to generate CSV");
-                MessageBox.Show(((Exception)ret["error"]).Message);
+                if ("EPPLUS".Equals(ret["mode"]))
+                {
+                    SetStatus("Fail to load model to generate CSV");
+                    MessageBox.Show(((Exception)ret["error"]).Message);
+                }
+                else
+                {
+                    ToCSVByEPPlus();
+                }
             }
             else if (ret.ContainsKey("result"))
             {
@@ -195,6 +212,22 @@ namespace ADA
             else
             {
                 this.csvGenBtn.Enabled = active;
+            }
+        }
+
+        private void modeCB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (modeCB.Checked)
+            {
+                xlsWarnLB.Text = "Safe mode only supports *.xlsx file.";
+                if (!inputTB.Text.ToLower().EndsWith(".xlsx")) {
+                    ActiveBtn(false);
+                }
+            }
+            else
+            {
+                xlsWarnLB.Text = "";
+                ActiveBtn(true);
             }
         }
     }
