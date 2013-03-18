@@ -127,7 +127,7 @@ namespace ADA
             SetStatus("Start generating CSV with MS Engine...");
             string inPath = inputTB.Text;
             string outPath = outputTB.Text + System.IO.Path.DirectorySeparatorChar;
-            string excelName = "CSV_Generator .xlsm";
+            string excelName = "CSV_Generator.xlsm";
             string macroName = "generate";
             bool isShowExcel = false;
             object[] args = new object[] { inPath, outPath };
