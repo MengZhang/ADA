@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ADAForm));
             this.csvPage = new System.Windows.Forms.TabPage();
+            this.modeCB = new System.Windows.Forms.CheckBox();
             this.xlsWarnLB = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialogIn = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialogOut = new System.Windows.Forms.FolderBrowserDialog();
-            this.modeCB = new System.Windows.Forms.CheckBox();
             this.csvPage.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.helpPage.SuspendLayout();
@@ -77,6 +77,18 @@
             this.csvPage.TabIndex = 0;
             this.csvPage.Text = "CSV Creator";
             this.csvPage.UseVisualStyleBackColor = true;
+            // 
+            // modeCB
+            // 
+            this.modeCB.AutoSize = true;
+            this.modeCB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modeCB.Location = new System.Drawing.Point(205, 196);
+            this.modeCB.Name = "modeCB";
+            this.modeCB.Size = new System.Drawing.Size(160, 21);
+            this.modeCB.TabIndex = 12;
+            this.modeCB.Text = "Run with safe mode";
+            this.modeCB.UseVisualStyleBackColor = true;
+            this.modeCB.CheckedChanged += new System.EventHandler(this.modeCB_CheckedChanged);
             // 
             // xlsWarnLB
             // 
@@ -229,7 +241,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 17);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Version 0.3.3";
+            this.label6.Text = "Version 0.3.5";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
@@ -258,18 +270,6 @@
             this.openFileDialogIn.Title = "Open Data File";
             this.openFileDialogIn.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialogIn_FileOk);
             // 
-            // modeCB
-            // 
-            this.modeCB.AutoSize = true;
-            this.modeCB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modeCB.Location = new System.Drawing.Point(205, 196);
-            this.modeCB.Name = "modeCB";
-            this.modeCB.Size = new System.Drawing.Size(160, 21);
-            this.modeCB.TabIndex = 12;
-            this.modeCB.Text = "Run with safe mode";
-            this.modeCB.UseVisualStyleBackColor = true;
-            this.modeCB.CheckedChanged += new System.EventHandler(this.modeCB_CheckedChanged);
-            // 
             // ADAForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -279,7 +279,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ADAForm";
-            this.Text = "AgMIP Data Assistant";
+            this.Text = "AgMIP Data Assistant 0.3.5";
             this.csvPage.ResumeLayout(false);
             this.csvPage.PerformLayout();
             this.tabControl1.ResumeLayout(false);

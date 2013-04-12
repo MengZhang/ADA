@@ -78,7 +78,11 @@ namespace ADA
 
         public static string toCsvText(string text, string sep)
         {
-            if (text.Contains(","))
+            if (text.Contains("\""))
+            {
+                text = text.Replace("\"", "\"\"");
+                text = "\"" + text + "\"";
+            } else if (text.Contains(","))
             {
                 text = "\"" + text + "\"";
             }
@@ -91,7 +95,7 @@ namespace ADA
             string text = sheet.Cells[row, col].Text;
             if (value == null)
             {
-                return text;
+                return text.Trim();
             }
             else
             {
@@ -105,7 +109,7 @@ namespace ADA
                 }
                 else
                 {
-                    return text;
+                    return text.Trim();
                 }
             }
         }
