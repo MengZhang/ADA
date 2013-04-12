@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ADAForm));
             this.csvPage = new System.Windows.Forms.TabPage();
+            this.modeCB = new System.Windows.Forms.CheckBox();
             this.xlsWarnLB = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,6 +57,7 @@
             // 
             // csvPage
             // 
+            this.csvPage.Controls.Add(this.modeCB);
             this.csvPage.Controls.Add(this.xlsWarnLB);
             this.csvPage.Controls.Add(this.label5);
             this.csvPage.Controls.Add(this.label4);
@@ -76,11 +78,23 @@
             this.csvPage.Text = "CSV Creator";
             this.csvPage.UseVisualStyleBackColor = true;
             // 
+            // modeCB
+            // 
+            this.modeCB.AutoSize = true;
+            this.modeCB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modeCB.Location = new System.Drawing.Point(205, 196);
+            this.modeCB.Name = "modeCB";
+            this.modeCB.Size = new System.Drawing.Size(160, 21);
+            this.modeCB.TabIndex = 12;
+            this.modeCB.Text = "Run with safe mode";
+            this.modeCB.UseVisualStyleBackColor = true;
+            this.modeCB.CheckedChanged += new System.EventHandler(this.modeCB_CheckedChanged);
+            // 
             // xlsWarnLB
             // 
             this.xlsWarnLB.AutoSize = true;
             this.xlsWarnLB.ForeColor = System.Drawing.Color.Red;
-            this.xlsWarnLB.Location = new System.Drawing.Point(194, 196);
+            this.xlsWarnLB.Location = new System.Drawing.Point(202, 230);
             this.xlsWarnLB.Name = "xlsWarnLB";
             this.xlsWarnLB.Size = new System.Drawing.Size(0, 17);
             this.xlsWarnLB.TabIndex = 11;
@@ -227,7 +241,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 17);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Version 0.3.2";
+            this.label6.Text = "Version 0.3.5";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
@@ -235,11 +249,11 @@
             this.label2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(17, 37);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(435, 139);
+            this.label2.Size = new System.Drawing.Size(435, 168);
             this.label2.TabIndex = 1;
-            this.label2.Text = "If you choose to load your file WITHOUT the extension of XLSX, you must make sure" +
-    " you have installed the MS Excel 2007,or you MIGHT NOT get correct output csv fi" +
-    "le.\r\n\r\nHave Fun!";
+            this.label2.Text = "* Safe mode can run without installation of Excel, but only supports *.xlsx.\r\n\r\n*" +
+    " Non-safe mode supports *.xls; *.xlsm; *.xlsb; *.xlsx files, but have to run wit" +
+    "h Excel 2007 or 2010.\r\n\r\n\r\nHave Fun!";
             // 
             // label1
             // 
@@ -265,7 +279,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ADAForm";
-            this.Text = "AgMIP Data Assistant";
+            this.Text = "AgMIP Data Assistant 0.3.5";
             this.csvPage.ResumeLayout(false);
             this.csvPage.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -297,6 +311,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label xlsWarnLB;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox modeCB;
     }
 }
 
