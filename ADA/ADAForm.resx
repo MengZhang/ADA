@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label2.Text" xml:space="preserve">
+    <value>* Safe mode can run without installation of Excel, but only supports *.xlsx.
+
+* Non-safe mode supports *.xls; *.xlsm; *.xlsb; *.xlsx files, but have to run with Excel 2007 or 2010.
+
+* 0.3.6 Fix the damaged zip file issue.
+
+Have Fun!</value>
+  </data>
   <metadata name="openFileDialogIn.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

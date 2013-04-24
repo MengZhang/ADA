@@ -17,6 +17,7 @@ namespace ADA
         {
             ZipOutputStream zipStream = new ZipOutputStream(File.Create(outDir));
             zipStream.SetLevel(6);  // 0-9
+            zipStream.UseZip64 = UseZip64.Off;
             for (int i = 0; i < files.Length; i++)
             {
                 if (File.Exists(files[i]))
@@ -35,6 +36,7 @@ namespace ADA
                 inDir += System.IO.Path.DirectorySeparatorChar;
 
             ZipOutputStream zipStream = new ZipOutputStream(File.Create(outDir));
+            zipStream.UseZip64 = UseZip64.Off;
             zipStream.SetLevel(6);  // 0-9
             CreateZipFiles(inDir, zipStream, inDir, delFlg);
 
@@ -49,7 +51,6 @@ namespace ADA
 
         private static void CreateZipFiles(string sourceFilePath, ZipOutputStream zipStream, string staticFile, bool delFlg)
         {
-            Crc32 crc = new Crc32();
             string[] filesArray;
             if (Directory.Exists(sourceFilePath))
             {
@@ -79,9 +80,6 @@ namespace ADA
                     entry.DateTime = DateTime.Now;
                     entry.Size = fileStream.Length;
                     fileStream.Close();
-                    crc.Reset();
-                    crc.Update(buffer);
-                    entry.Crc = crc.Value;
                     zipStream.PutNextEntry(entry);
                     zipStream.Write(buffer, 0, buffer.Length);
                     if (delFlg) File.Delete(file);

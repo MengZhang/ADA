@@ -241,7 +241,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 17);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Version 0.3.5";
+            this.label6.Text = "Version 0.3.6";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
@@ -251,9 +251,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(435, 168);
             this.label2.TabIndex = 1;
-            this.label2.Text = "* Safe mode can run without installation of Excel, but only supports *.xlsx.\r\n\r\n*" +
-    " Non-safe mode supports *.xls; *.xlsm; *.xlsb; *.xlsx files, but have to run wit" +
-    "h Excel 2007 or 2010.\r\n\r\n\r\nHave Fun!";
+            this.label2.Text = resources.GetString("label2.Text");
             // 
             // label1
             // 
@@ -279,7 +277,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ADAForm";
-            this.Text = "AgMIP Data Assistant 0.3.5";
+            this.Text = "AgMIP Data Assistant 0.3.6";
             this.csvPage.ResumeLayout(false);
             this.csvPage.PerformLayout();
             this.tabControl1.ResumeLayout(false);
