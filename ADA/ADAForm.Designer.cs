@@ -105,9 +105,9 @@
             this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(18, 90);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(120, 18);
+            this.label5.Size = new System.Drawing.Size(126, 18);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Output Direcoty";
+            this.label5.Text = "Output Directory";
             // 
             // label4
             // 
@@ -251,7 +251,9 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(435, 168);
             this.label2.TabIndex = 1;
-            this.label2.Text = resources.GetString("label2.Text");
+            this.label2.Text = "* Safe mode can run without installation of Excel, but only supports *.xlsx.\r\n\r\n*" +
+    " Non-safe mode supports *.xls; *.xlsm; *.xlsb; *.xlsx files, but have to run wit" +
+    "h Excel 2007 or 2010.\r\n\r\n\r\nHave Fun!";
             // 
             // label1
             // 
