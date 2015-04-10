@@ -241,7 +241,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 17);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Version 0.3.6";
+            this.label6.Text = "Version 0.3.7";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
@@ -279,7 +279,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ADAForm";
-            this.Text = "AgMIP Data Assistant 0.3.6";
+            this.Text = "AgMIP Data Assistant 0.3.7";
             this.csvPage.ResumeLayout(false);
             this.csvPage.PerformLayout();
             this.tabControl1.ResumeLayout(false);
